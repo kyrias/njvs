@@ -1,38 +1,83 @@
-<table>
-	<tr>
-		<td>valsi</td>
-		<td>{{ word.word }}</td>
-	</tr>
-	<tr>
-		<td>type</td>
-		<td>{{ word.type.type }}</td>
-	</tr>
-	<tr>
-		<td>creator</td>
-		<td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
-	</tr>
-	<tr>
-		<td>entered</td>
-		<td>{{ word.creationDate }}</td>
-	</tr>
-</table>
+<!doctype html>
+<html>
+  <head>
+    <style>
+.key {
+  width: 5em;
+}
+    </style>
+  </head>
 
-{% for definition in word.definitions %}
-<h3>{{ definition.language.name }}</h3>
-<table>
-	<tr>
-		<td>definition</td>
-		<td>{{ definition.definition }}</td>
-	</tr>
-{% if definition.notes %}
-	<tr>
-		<td>notes</td>
-		<td>{{ definition.notes }}</td>
-	</tr>
-{% endif %}
-	<tr>
-		<td>creator</td>
-		<td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
-	</tr>
-</table>
-{% endfor %}
+  <body>
+
+    <table>
+      <tr>
+        <td>valsi</td>
+        <td>{{ word.word }}</td>
+      </tr>
+      <tr>
+        <td>type</td>
+        <td>{{ word.type.type }}</td>
+      </tr>
+      <tr>
+        <td>creator</td>
+        <td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
+      </tr>
+      <tr>
+        <td>entered</td>
+        <td>{{ word.creationDate }}</td>
+      </tr>
+    </table>
+
+    {% for language in definitions %}
+    <h3>{{ language }}</h3>
+
+    <div style="margin-left: 1em">
+      {% for definition in definitions[language] %}
+      <h4>Definition #{{ loop.index }}</h4>
+      <table>
+
+        <tr>
+          <td class="key">definition</td>
+          <td>{{ definition.definition }}</td>
+        </tr>
+
+        {% if definition.notes %}
+        <tr>
+          <td>notes</td>
+          <td>{{ definition.notes }}</td>
+        </tr>
+        {% endif %}
+
+        {% if definition.etymology %}
+        <tr>
+          <td>etymology</td>
+          <td>{{ definition.etymology }}</td>
+        </tr>
+        {% endif %}
+
+        {% if definition.tags %}
+        <tr>
+          <td>tags</td>
+          <td>{{ definition.tags }}</td>
+        </tr>
+        {% endif %}
+
+        <tr>
+          <td>creator</td>
+          <td><a href="/users/{{ word.creator.username }}">{{ definition.creator.displayname }}</a></td>
+        </tr>
+
+        <tr>
+          <td>entered</td>
+          <td>{{ definition.creationDate }}</td>
+        </tr>
+      </table>
+      {% endfor %}
+    </div>
+
+    {% endfor %}
+
+  </body>
+</html>
+<!-- vim: set sw=2 et: -->

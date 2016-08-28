@@ -74,4 +74,13 @@ def show_users():
 @app.route('/words/<word>')
 def show_word(word):
     word = words.query.filter_by(word=word).first()
-    return render_template('word.html', word=word)
+    defs = {}
+
+    for definition in definitions.query.filter_by(wordId=word.id).all():
+        lang = definition.language.name
+        if lang not in defs:
+            defs[lang] = []
+
+        defs[lang].extend([definitions])
+
+    return render_template('word.html', word=word, definitions=defs)
