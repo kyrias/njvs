@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <td>creator</td>
-        <td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
+        <td><a href="/users/{{ word.creator.username | urlencode }}">{{ word.creator.displayname }}</a></td>
       </tr>
       <tr>
         <td>entered</td>
