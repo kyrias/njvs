@@ -59,13 +59,19 @@
         {% if definition.tags %}
         <tr>
           <td>tags</td>
-          <td>{{ definition.tags }}</td>
+          <td>
+            <ol>
+            {% for tag in definition.tags %}
+              <li>{{ tag.tag }}</li>
+            {% endfor %}
+            </ol>
+          </td>
         </tr>
         {% endif %}
 
         <tr>
           <td>creator</td>
-          <td><a href="/users/{{ word.creator.username }}">{{ definition.creator.displayname }}</a></td>
+          <td><a href="/users/{{ definition.creator.username }}">{{ definition.creator.displayname }}</a></td>
         </tr>
 
         <tr>

@@ -1,11 +1,15 @@
-from flask import Flask
-from flask import render_template
-
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///njvs.db'
+app.config.from_object(__name__)
+app.config.update(dict(
+    SQLALCHEMY_DATABASE_URI='sqlite:///njvs.db',
+    SECRET_KEY='xkFFngMCcZrMVmGt1MZ7ir9+3TCKJISBfiSHup1wYclQSRDjag+YvctvWxW2Ghi'
+))
 db = SQLAlchemy(app)
+
 
 class languages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,6 +85,6 @@ def show_word(word):
         if lang not in defs:
             defs[lang] = []
 
-        defs[lang].extend([definitions])
+        defs[lang].extend([definition])
 
     return render_template('word.html', word=word, definitions=defs)
