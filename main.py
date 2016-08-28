@@ -75,6 +75,13 @@ def show_users():
     return render_template('users.html', users=us)
 
 
+@app.route('/words/')
+def show_words():
+    ws = words.query.all()
+
+    return render_template('words.html', words=ws)
+
+
 @app.route('/words/<word>')
 def show_word(word):
     word = words.query.filter_by(word=word).first()

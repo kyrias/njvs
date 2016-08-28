@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<body>
+	<h2>List of words</h2>
+	<ul>
+{% for word in words %}
+	<li><a href="/words/{{ word.word | urlencode }}">{{ word.word }}</a></li>
+{% endfor %}
+	</ul>
+</body>
+</html>
