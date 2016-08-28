@@ -13,15 +13,15 @@ db = SQLAlchemy(app)
 
 class languages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tag = db.Column(db.String(255), unique=True)
-    name = db.Column(db.String(255), unique=True)
+    tag = db.Column(db.String(3), unique=True)
+    name = db.Column(db.String(25), unique=True)
 
 
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     creationDate = db.Column(db.Date)
-    username = db.Column(db.String(255), unique=True)
-    displayname = db.Column(db.String(255))
+    username = db.Column(db.String(20), unique=True)
+    displayname = db.Column(db.String(20))
 
     words = db.relationship('words', backref='creator')
     definitions = db.relationship('definitions', backref='creator')
@@ -29,7 +29,7 @@ class users(db.Model):
 
 class types(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(255), unique=True)
+    type = db.Column(db.String(20), unique=True)
 
     words = db.relationship('words', backref='type')
 
@@ -39,7 +39,7 @@ class words(db.Model):
     typeId = db.Column(db.Integer, db.ForeignKey('types.id'))
     creatorId = db.Column(db.Integer, db.ForeignKey('users.id'))
     creationDate = db.Column(db.Date)
-    word = db.Column(db.String(255), unique=True)
+    word = db.Column(db.String(50), unique=True)
 
     definitions = db.relationship('definitions', backref='word')
 
@@ -65,7 +65,7 @@ class definitions(db.Model):
 
 class tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tag = db.Column(db.String(255), unique=True)
+    tag = db.Column(db.String(50), unique=True)
     owner = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 

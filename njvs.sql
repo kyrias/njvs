@@ -1,7 +1,7 @@
 CREATE TABLE languages (
 	id INTEGER PRIMARY KEY,
-	tag VARCHAR(255) UNIQUE, -- ISO 639-2 code
-	name VARCHAR(255) UNIQUE
+	tag VARCHAR(3) UNIQUE, -- ISO 639-3 code
+	name VARCHAR(25) UNIQUE
 );
 INSERT INTO languages (tag, name)
        VALUES ("jbo", "la lojban");
@@ -13,8 +13,8 @@ INSERT INTO languages (tag, name)
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY,
 	creationDate DATETIME,
-	username VARCHAR(255) UNIQUE,
-	displayname VARCHAR(255)
+	username VARCHAR(20) UNIQUE,
+	displayname VARCHAR(20)
 );
 INSERT INTO users (username, displayname)
        VALUES ("kyrias", "Johannes Löthberg");
@@ -23,7 +23,7 @@ INSERT INTO users (username, displayname)
 
 CREATE TABLE types (
 	id INTEGER PRIMARY KEY,
-	type VARCHAR(255) UNIQUE
+	type VARCHAR(20) UNIQUE
 );
 INSERT INTO types (type) VALUES ('gismu');
 INSERT INTO types (type) VALUES ('lujvo');
@@ -42,7 +42,7 @@ CREATE TABLE words (
 	creatorId INTEGER,
 	creationDate DATETIME DEFAULT (datetime('now','localtime')),
 
-	word VARCHAR(255) UNIQUE,
+	word VARCHAR(50) UNIQUE,
 
 	FOREIGN KEY (typeId) REFERENCES types(id),
 	FOREIGN KEY (creatorId) REFERENCES users(id)
@@ -97,7 +97,7 @@ INSERT INTO definitions (wordId, languageId, creatorId, creationDate, definition
 CREATE TABLE tags (
 	id INTEGER PRIMARY KEY,
 
-	tag VARCHAR(255) UNIQUE,
+	tag VARCHAR(50) UNIQUE,
 	owner INTEGER,
 
 	FOREIGN KEY (owner) REFERENCES users(id)
