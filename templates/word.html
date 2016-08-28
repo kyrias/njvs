@@ -60,11 +60,11 @@
         <tr>
           <td>gloss words</td>
           <td>
-            <ol>
+            <ul>
             {% for glossword in definition.glosswords %}
             <li><a href="/glosswords/{{ glossword.glossword | urlencode }}">{{ glossword.glossword }}</a></li>
             {% endfor %}
-            </ol>
+            </ul>
           </td>
         </tr>
         {% endif %}

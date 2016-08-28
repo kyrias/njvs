@@ -66,7 +66,7 @@ class definitions(db.Model):
 class glosswords(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     glossword = db.Column(db.String(50), unique=True)
-    owner = db.Column(db.Integer, db.ForeignKey('users.id'))
+    definitions = db.relationship('definitions', secondary=definition_glosswords_association)
 
 
 @app.route('/users/')
@@ -88,3 +88,14 @@ def show_word(word):
         defs[lang].extend([definition])
 
     return render_template('word.html', word=word, definitions=defs)
+
+
+@app.route('/glosswords/<glossword>')
+def show_glossword(glossword):
+    glossword = glosswords.query.filter_by(glossword=glossword).first()
+
+    defs = {}
+    for definition in glossword.definitions:
+        defs[definition.wordId] = definition
+
+    return render_template('glossword.html', glossword=glossword, definitions=defs)

@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<body>
+	<h2>{{ glossword.glossword }}</h2>
+	<ul>
+{% for definition in definitions %}
+	{% set d = definitions[definition] %}
+	<li><a href="/words/{{ d.word.word | urlencode }}">{{ d.word.word }}</a></li>
+{% endfor %}
+	</ul>
+</body>
+</html>

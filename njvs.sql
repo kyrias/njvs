@@ -97,14 +97,10 @@ INSERT INTO definitions (wordId, languageId, creatorId, creationDate, definition
 CREATE TABLE glosswords (
 	id INTEGER PRIMARY KEY,
 
-	glossword VARCHAR(50) UNIQUE,
-	owner INTEGER,
-
-	FOREIGN KEY (owner) REFERENCES users(id)
+	glossword VARCHAR(50) UNIQUE
 );
-INSERT INTO glosswords (glossword, owner)
-       VALUES ("something",
-               (SELECT id FROM users WHERE users.username = "kyrias"));
+INSERT INTO glosswords (glossword)
+       VALUES ("something");
 
 
 CREATE TABLE definition_glosswords (
