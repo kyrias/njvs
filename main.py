@@ -44,9 +44,9 @@ class words(db.Model):
     definitions = db.relationship('definitions', backref='word')
 
 
-definition_tags_association = db.Table('definition_tags',
+definition_glosswords_association = db.Table('definition_glosswords',
     db.Column('definitionId', db.Integer, db.ForeignKey('definitions.id')),
-    db.Column('tagId', db.Integer, db.ForeignKey('tags.id'))
+    db.Column('glosswordId', db.Integer, db.ForeignKey('glosswords.id'))
 )
 
 class definitions(db.Model):
@@ -59,13 +59,13 @@ class definitions(db.Model):
     notes = db.Column(db.Text)
     etymology = db.Column(db.Text)
 
-    tags = db.relationship('tags', secondary=definition_tags_association)
+    glosswords = db.relationship('glosswords', secondary=definition_glosswords_association)
     language = db.relationship('languages')
 
 
-class tags(db.Model):
+class glosswords(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tag = db.Column(db.String(50), unique=True)
+    glossword = db.Column(db.String(50), unique=True)
     owner = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 

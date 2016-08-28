@@ -56,13 +56,13 @@
         </tr>
         {% endif %}
 
-        {% if definition.tags %}
+        {% if definition.glosswords %}
         <tr>
-          <td>tags</td>
+          <td>gloss words</td>
           <td>
             <ol>
-            {% for tag in definition.tags %}
-              <li>{{ tag.tag }}</li>
+            {% for glossword in definition.glosswords %}
+            <li><a href="/glosswords/{{ glossword.glossword | urlencode }}">{{ glossword.glossword }}</a></li>
             {% endfor %}
             </ol>
           </td>
@@ -71,7 +71,7 @@
 
         <tr>
           <td>creator</td>
-          <td><a href="/users/{{ definition.creator.username }}">{{ definition.creator.displayname }}</a></td>
+          <td><a href="/users/{{ definition.creator.username | urlencode }}">{{ definition.creator.displayname }}</a></td>
         </tr>
 
         <tr>

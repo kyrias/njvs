@@ -94,30 +94,30 @@ INSERT INTO definitions (wordId, languageId, creatorId, creationDate, definition
 
 
 
-CREATE TABLE tags (
+CREATE TABLE glosswords (
 	id INTEGER PRIMARY KEY,
 
-	tag VARCHAR(50) UNIQUE,
+	glossword VARCHAR(50) UNIQUE,
 	owner INTEGER,
 
 	FOREIGN KEY (owner) REFERENCES users(id)
 );
-INSERT INTO tags (tag, owner)
+INSERT INTO glosswords (glossword, owner)
        VALUES ("something",
                (SELECT id FROM users WHERE users.username = "kyrias"));
 
 
-CREATE TABLE definition_tags (
+CREATE TABLE definition_glosswords (
 	definitionId INTEGER NOT NULL,
-	tagId INTEGER NOT NULL,
+	glosswordId INTEGER NOT NULL,
 
-	PRIMARY KEY (definitionId, tagId),
+	PRIMARY KEY (definitionId, glosswordId),
 	FOREIGN KEY (definitionId) REFERENCES definitions(id),
-	FOREIGN KEY (tagId) REFERENCES tags(id)
+	FOREIGN KEY (glosswordId) REFERENCES glosswords(id)
 );
-INSERT INTO definition_tags (definitionId, tagId)
+INSERT INTO definition_glosswords (definitionId, glosswordId)
        VALUES ((SELECT id FROM definitions WHERE definitions.wordId = (SELECT id FROM words WHERE words.word = "coi") AND definitions.languageId = 1),
-               (SELECT id FROM tags WHERE tags.tag = "something"));
-INSERT INTO definition_tags (definitionId, tagId)
+               (SELECT id FROM glosswords WHERE glosswords.glossword = "something"));
+INSERT INTO definition_glosswords (definitionId, glosswordId)
        VALUES ((SELECT id FROM definitions WHERE definitions.wordId = (SELECT id FROM words WHERE words.word = "coi") AND definitions.languageId = 2),
-               (SELECT id FROM tags WHERE tags.tag = "something"));
+               (SELECT id FROM glosswords WHERE glosswords.glossword = "something"));
