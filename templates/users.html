@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Users</title>
+
+<ol>
+{% for user in users %}
+	<li>
+		<ol>{{ user.username }} ({{ user.realname }})</li>
+			{% for word in user.words %}
+			<li>{{ word.word }}</li>
+			{% endfor %}
+		</ol>
+	</li>
+{% endfor %}
+</ol>

@@ -1,0 +1,38 @@
+<table>
+	<tr>
+		<td>valsi</td>
+		<td>{{ word.word }}</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>{{ word.type.type }}</td>
+	</tr>
+	<tr>
+		<td>creator</td>
+		<td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
+	</tr>
+	<tr>
+		<td>entered</td>
+		<td>{{ word.creationDate }}</td>
+	</tr>
+</table>
+
+{% for definition in word.definitions %}
+<h3>{{ definition.language.name }}</h3>
+<table>
+	<tr>
+		<td>definition</td>
+		<td>{{ definition.definition }}</td>
+	</tr>
+{% if definition.notes %}
+	<tr>
+		<td>notes</td>
+		<td>{{ definition.notes }}</td>
+	</tr>
+{% endif %}
+	<tr>
+		<td>creator</td>
+		<td><a href="/users/{{ word.creator.username }}">{{ word.creator.displayname }}</a></td>
+	</tr>
+</table>
+{% endfor %}
